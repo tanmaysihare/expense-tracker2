@@ -1,10 +1,7 @@
-
 .header {
     background-color: #f0f0f0; /* Light mode background color */
-    height: 100rem;
-    width: 100%;
-    padding-right: 0.5rem;
-    margin-left: -0.5rem;
+    padding: 10px;
+    display: flex;
     justify-content: space-between;
     align-items: center;
   }
@@ -12,10 +9,4 @@
   .darkMode {
     background-color: #333; /* Dark mode background color */
     color: #fff; /* Text color in dark mode */
-    height: 100rem;
-    width: 100%;
-    padding-right: 0.5rem;
-    margin-left: -0.5rem;
-    justify-content: space-between;
-    align-items: center;
   }

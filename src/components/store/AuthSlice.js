@@ -5,6 +5,8 @@ const initialAuthState = {
     isLoggedIn : !!localStorage.getItem('token'),
     userId: null,
     token: localStorage.getItem('token') || null,
+    isEmailVerified: false,
+    isProfileUpdated: false,
 };
 const authSlice = createSlice({
     name: 'authentication',
@@ -25,7 +27,17 @@ const authSlice = createSlice({
             state.isLoggedIn = false;
             state.userId = null;
             state.token = null;
-        }
+        },
+        emailVerification(state){
+            state.isEmailVerified = true;
+        },
+        profileUpdate(state,action){
+            state.isProfileUpdated = true;
+            state.userId = action.payload.userId;
+        },
+        manualProfileUpdate(state){
+            state.isProfileUpdated = false;
+        },
     }
 });
 

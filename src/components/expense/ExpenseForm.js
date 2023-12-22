@@ -1,23 +1,33 @@
 import React, {useState} from "react";
-import { useSelector } from "react-redux";
+import { useSelector,useDispatch } from "react-redux";
+import { expenseActions } from "../store/ExpenseSlice";
 import ExpenseList from "./ExpenseList";
 import {db} from "../../firebase";
 import { ref, set, push} from "firebase/database";
+import { toggleDarkMode } from "../store/ThemeSlice";
 
 const ExpenseForm = ()=>{
     const [amount,setAmount] = useState('');
     const [exName,setName] = useState('');
     const [category,setCategory] = useState('');
     const editingStatus = useSelector((state)=> state.expenses.editExpense);
-   
- 
+    const userId = useSelector((state)=> state.auth.userId);
+    const premium = useSelector((state)=>state.expenses.premiumActivated);
+    const dispatch = useDispatch();
+console.log(premium);
      const submitHandler = (event) => {
         event.preventDefault();
-      
+      if(amount >= 10000 || premium){
+        dispatch(expenseActions.activatePremium());
+        dispatch(toggleDarkMode());
+      }else{
+        dispatch(expenseActions.deactivatePremium());
+        dispatch(toggleDarkMode());
+      }
         if (!exName || !amount || !category) {
           alert('Please enter the inputs correctly');
         } else {
-          const expensesRef = ref(db, 'expenses');
+          const expensesRef = ref(db, `${userId}/Expenses`);
           const newExpenseRef = push(expensesRef); // Use push to automatically generate a unique ID
       
           set(newExpenseRef, {

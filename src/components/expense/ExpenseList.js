@@ -8,6 +8,7 @@ const ExpenseList = () => {
   const expenseList = useSelector((state) => state.expenses.list);
   const editingStatus = useSelector((state)=> state.expenses.editExpense);
   const selectedExpense = useSelector((state) => state.expenses.editingList[0]);
+  const userId = useSelector((state)=> state.auth.userId);
   const dispatch = useDispatch();
 
   const [amount, setAmount] = useState("");
@@ -15,7 +16,7 @@ const ExpenseList = () => {
   const [category, setCategory] = useState("");
 // for get request 
   useEffect(() => {
-    const expensesRef = ref(db, 'expenses');
+    const expensesRef = ref(db, `${userId}/Expenses`);
     const unsubscribe = onValue(expensesRef, (snapshot) => {
       const data = snapshot.val();
       if (data) {
@@ -27,7 +28,7 @@ const ExpenseList = () => {
     return () => {
       unsubscribe();
     };
-  }, [dispatch]);
+  }, [dispatch,userId]);
 
   //for edit
   const editHandler = (expense)=> {
@@ -39,7 +40,7 @@ const ExpenseList = () => {
   const updateHandler =  () => {
         
             // Update the expense in the database
-             update(ref(db, `expenses/${selectedExpense.id}`), {
+             update(ref(db, `${userId}/Expenses/${selectedExpense.id}`), {
               amount: amount,
               name: exName,
               category: category,

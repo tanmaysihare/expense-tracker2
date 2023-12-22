@@ -2,7 +2,7 @@ import React,{useRef} from "react";
 import classes from './AuthForm.module.css';
 import { authActions } from "../store/AuthSlice";
 import { useDispatch, useSelector } from "react-redux";
-import { useHistory } from "react-router-dom";
+import { useHistory,Link } from "react-router-dom";
 
 const AuthForm = () => {
 
@@ -61,8 +61,14 @@ fetch(url,
       });
     }
   }).then((data) => {
-   dispatch(authActions.login({token:data.idToken})); 
+    console.log(data);
+   dispatch(authActions.login({token:data.idToken,userId:data.localId})); 
    localStorage.setItem('token',data.idToken);
+   if(data.displayName === ''){
+      dispatch(authActions.manualProfileUpdate());
+   }else{
+    dispatch(authActions.profileUpdate({userId:data.localId}));
+   }
   history.replace('/home');
   }).catch((err) => {
     alert(err.message);
@@ -90,8 +96,16 @@ fetch(url,
                     <input type="password" id="conformPassword" ref={conformPasswordInputRef}/>
                 </div>
                 <div className={classes.actions}>
-                    <button>{ isSignIn ? "Create Account":"login"}</button>
-                    <button type="button" className={classes.toggle} onClick={switchModeHandler}>{isSignIn ? "Login With Existing Account" : "Create New Account"}</button>
+                    <button>
+                      { isSignIn ? "Create Account":"login"}
+                      </button>
+                    <button 
+                    type="button" 
+                    className={classes.toggle} 
+                    onClick={switchModeHandler}>
+                      {isSignIn ? "Login With Existing Account" : "Create New Account  |" }
+                      {!isSignIn ? <Link to="/forgetPassword">|  Forget Password</Link> : ""}
+                      </button>
                 </div>
             </form>
 

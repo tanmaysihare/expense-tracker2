@@ -29,6 +29,9 @@ const expenseSlice = createSlice({
    activatePremium: (state) => {
       state.premiumActivated = true;
     },
+    deactivatePremium: (state)=> {
+      state.premiumActivated = false;
+    },
     // Add other reducer logic as needed 
   },
 });
