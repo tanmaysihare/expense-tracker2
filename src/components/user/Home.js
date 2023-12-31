@@ -5,7 +5,7 @@ import { useSelector } from 'react-redux';
 
 const Home = ()=> {
   const isProfileUpdated = useSelector((state)=> state.auth.isProfileUpdated);
-  
+  console.log("in home",isProfileUpdated);
   return (
     <>
   

@@ -31,9 +31,8 @@ const authSlice = createSlice({
         emailVerification(state){
             state.isEmailVerified = true;
         },
-        profileUpdate(state,action){
+        profileUpdate(state){
             state.isProfileUpdated = true;
-            state.userId = action.payload.userId;
         },
         manualProfileUpdate(state){
             state.isProfileUpdated = false;

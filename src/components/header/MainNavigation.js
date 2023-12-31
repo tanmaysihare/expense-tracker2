@@ -4,7 +4,7 @@ import { useSelector,useDispatch} from "react-redux";
 import classes from './MainNavigation.module.css';
 import { authActions } from "../store/AuthSlice";
 import { toggleDarkMode } from "../store/ThemeSlice";
-//import expenseList from '../expense/ExpenseList';
+import { expenseActions } from "../store/ExpenseSlice";
 
 const MainNavigation = () =>{
 const isLoggedIn = useSelector((state)=> state.auth.isLoggedIn);
@@ -18,6 +18,7 @@ const history = useHistory();
     };
    const themeHandler = () => {
     dispatch(toggleDarkMode());
+    dispatch(expenseActions.deactivatePremium());
    };
    const downloadCSV = () => {
     if (!Array.isArray(expenseList)) {

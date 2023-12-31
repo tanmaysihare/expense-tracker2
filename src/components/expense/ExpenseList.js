@@ -56,7 +56,7 @@ const ExpenseList = () => {
   //for delete
   const deleteHandler = async(expenseId)=>{
     try{
-        await remove(ref(db,`expenses/${expenseId}`));
+        await remove(ref(db,`${userId}/Expenses/${expenseId}`));
         dispatch(expenseActions.deleteExpense(expenseId));
     }catch(error){
         console.error("error deleting expense:", error.massage);

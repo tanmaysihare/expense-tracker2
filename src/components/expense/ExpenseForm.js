@@ -14,15 +14,20 @@ const ExpenseForm = ()=>{
     const userId = useSelector((state)=> state.auth.userId);
     const premium = useSelector((state)=>state.expenses.premiumActivated);
     const dispatch = useDispatch();
-console.log(premium);
-     const submitHandler = (event) => {
+    console.log("is premium on or off: ",premium);
+    
+    const submitHandler = (event) => {
         event.preventDefault();
-      if(amount >= 10000 || premium){
+      
+      if(amount >= 10000 && !premium){
         dispatch(expenseActions.activatePremium());
         dispatch(toggleDarkMode());
+        console.log("if is running");
+   
       }else{
         dispatch(expenseActions.deactivatePremium());
-        dispatch(toggleDarkMode());
+       // dispatch(toggleDarkMode());
+        console.log("else is running");
       }
         if (!exName || !amount || !category) {
           alert('Please enter the inputs correctly');
@@ -47,9 +52,9 @@ console.log(premium);
         {!editingStatus && <div style={{border:'dashed 2px red',margin:'2rem',padding:'2rem'}}>
             <h2>Expense Tracker</h2>
            <form  onSubmit={submitHandler}> 
-                <label style={{margin:'1rem',padding:'1rem'}}>Amount You Spend : <input style={{margin:'1rem'}} type="number" value={amount} onChange={(e)=> setAmount(e.target.value)} /></label>
-                <label style={{margin:'1rem',padding:'1rem'}}>On What You Spend Give Name : <input style={{margin:'1rem'}} type="text" value={exName} onChange={(e)=> setName(e.target.value)} /></label>
-                <label style={{margin:'1rem',padding:'1rem'}}>Select An Category : <select style={{margin:'0.5rem'}} value={category} onChange={(e)=> setCategory(e.target.value)}>
+                <label style={{margin:'1rem',padding:'1rem'}}>Amount Spend : <input style={{margin:'1rem'}} type="number" value={amount} onChange={(e)=> setAmount(e.target.value)} /></label>
+                <label style={{margin:'1rem',padding:'1rem'}}>Provide Name On What You Spend : <input style={{margin:'1rem'}} type="text" value={exName} onChange={(e)=> setName(e.target.value)} /></label>
+                <label style={{margin:'1rem',padding:'1rem'}}>Please Select An Category : <select style={{margin:'0.5rem'}} value={category} onChange={(e)=> setCategory(e.target.value)}>
                     <option>Select Category</option>
                     <option value="Food" >Food</option>
                     <option value="Transport" >Transportation</option>

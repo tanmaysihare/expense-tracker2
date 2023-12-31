@@ -5,7 +5,7 @@ import { useSelector } from "react-redux";
 
  const Header = (props)=> {
     const themeToggle = useSelector((state)=> state.theme.isDarkMode);
-    console.log(themeToggle);
+    console.log("is dark mode on or off:",themeToggle);
     return (
         <div className={`${themeToggle ? classes.darkMode : classes.header}`}>
         <MainNavigation />
@@ -13,4 +13,4 @@ import { useSelector } from "react-redux";
         </div>
     );
  };
- export default Header;
+ export default Header; 

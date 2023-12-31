@@ -1,10 +1,10 @@
 import React,{useRef} from "react";
 import { useSelector,useDispatch } from "react-redux";
-//import { authActions } from "../store/AuthSlice";
+import { authActions } from "../store/AuthSlice";
 
 const ProfileCompletion = ()=> {
   const token = useSelector((state)=> state.auth.token); 
-//  const dispatch = useDispatch(); 
+  const dispatch = useDispatch(); 
   const displayNameRef = useRef();
   const photoUrlRef = useRef();
 
@@ -40,8 +40,8 @@ const ProfileCompletion = ()=> {
   
       const data = await response.json();
       // Handle successful update, if needed
-      console.log("Profile updated successfully:");
-      //dispatch(authActions.profileUpdate({userId:data.displayName}));
+      console.log("Profile updated successfully:",data);
+      dispatch(authActions.profileUpdate());
     
     } catch (error) {
       // Handle error, display a message, or redirect the user
