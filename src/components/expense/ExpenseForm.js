@@ -13,6 +13,7 @@ const ExpenseForm = ()=>{
     const editingStatus = useSelector((state)=> state.expenses.editExpense);
     const userId = useSelector((state)=> state.auth.userId);
     const premium = useSelector((state)=>state.expenses.premiumActivated);
+    const themeToggle = useSelector((state)=> state.theme.isDarkMode);
     const dispatch = useDispatch();
     console.log("is premium on or off: ",premium);
     
@@ -21,12 +22,14 @@ const ExpenseForm = ()=>{
       
       if(amount >= 10000 && !premium){
         dispatch(expenseActions.activatePremium());
-        dispatch(toggleDarkMode());
+        //dispatch(toggleDarkMode());
         console.log("if is running");
    
       }else{
         dispatch(expenseActions.deactivatePremium());
-       // dispatch(toggleDarkMode());
+      // if(amount < 10000 && !themeToggle){
+      //  dispatch(toggleDarkMode());
+      // }
         console.log("else is running");
       }
         if (!exName || !amount || !category) {

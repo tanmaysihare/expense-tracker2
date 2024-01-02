@@ -3,10 +3,10 @@ import {createSlice} from '@reduxjs/toolkit';
 const initialAuthState = {
     isSignIn : true,
     isLoggedIn : !!localStorage.getItem('token'),
-    userId: null,
+    userId:  localStorage.getItem('userId') || null,
     token: localStorage.getItem('token') || null,
     isEmailVerified: false,
-    isProfileUpdated: false,
+    isProfileUpdated: localStorage.getItem('isProfileUpdated')|| false,
 };
 const authSlice = createSlice({
     name: 'authentication',

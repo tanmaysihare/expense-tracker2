@@ -18,9 +18,11 @@ const Home = ()=> {
             <ProfileCompletion />
           </div>
         }
+         {isProfileUpdated && 
           <div>
-           <ExpenseForm/>
-          </div>
+          <ExpenseForm/>
+         </div>
+         } 
         </section>
         </div>
         

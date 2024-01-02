@@ -64,10 +64,12 @@ fetch(url,
     console.log(data);
    dispatch(authActions.login({token:data.idToken,userId:data.localId})); 
    localStorage.setItem('token',data.idToken);
-   if(data.displayName === ''){
+   localStorage.setItem('userId',data.localId);
+   if(data.displayName === '' || null){
       dispatch(authActions.manualProfileUpdate());
    }else{
-    dispatch(authActions.profileUpdate({userId:data.localId}));
+    dispatch(authActions.profileUpdate());
+    localStorage.setItem('isProfileUpdated', true);
    }
   history.replace('/home');
   }).catch((err) => {

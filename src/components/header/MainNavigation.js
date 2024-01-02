@@ -14,6 +14,8 @@ const history = useHistory();
     const logoutHandler = ()=> {
         dispatch(authActions.logout());
         localStorage.removeItem("token");
+        localStorage.removeItem("isProfileUpdated");
+        localStorage.removeItem("userId");
         history.push('/auth');
     };
    const themeHandler = () => {
